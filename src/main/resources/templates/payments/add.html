@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<script src="/js/controlOutput.js" defer></script>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<title>明細追加画面</title>
+</head>
+<body>
+	<h1>明細追加画面</h1>
+	<p><form class="left-form"><input type="submit" value="一覧へ戻る" formaction="/uda-payments" formmethod="GET"/></form></p>
+	<form method="post" th:action="@{/uda-payments/add}">
+		日時：<input type="date" name="date" required><br>
+		収入/支出：<input type="radio" name="budgetType" value="収入" checked onclick="checkradio('none')">収入 <input type="radio" name="budgetType" value="種別" onclick="checkradio('inline')">支出<br>
+		種別： <span id="1"><input type="radio" name="type" value="1" checked>食費 </span><span id="2"><input type="radio" name="type" value="2">趣味 </span><span id="3"><input type="radio" name="type" value="3">教養</span><br>
+		品名：<input type="text" name="name"	maxlength="15" size="30" required><br>
+		金額：<input type="number" name="price" oninput="sliceMaxLength(this, 8)" required>円<br>
+		<br>
+		<input type="submit" value="登録">
+	</form>
+</body>
+</html>

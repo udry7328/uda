@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<title>家計簿</title>
+</head>
+<body>
+	<h1>家計簿一覧</h1>
+	<p><form class="right-form"><input type="submit" value="明細追加" formaction="/uda-payments/add" formmethod="GET"/></form></p>
+	
+	<form method="post" th:action="@{/uda-payments/findByYearAndMonth}">
+		集計したい年月：
+		<input type="text" name="year" oninput="sliceMaxLength(this, 4)" size="4" required>年
+		<input type="text" name="month" oninput="sliceMaxLength(this, 4)" size="4" required>月
+		<input type="submit" value="集計">
+	</form>
+
+	<h3 th:if="${year != null}" th:text="${year} + '年' + ${month} + '月の集計'"></h3>
+	
+	<table class="table table-striped">
+		<tr>
+			<th>収支年月日</th>
+			<th>収入/支出</th>
+			<th>種別</th>
+			<th>品名</th>
+			<th>金額</th>
+			<th></th>
+		</tr>
+
+		<tr th:each="udaPayment : ${list}">
+				<td th:text="${udaPayment.date}"></td>
+				<td th:text="${udaPayment.budgetType}"></td>
+				<td th:if="${udaPayment.type == 1}">食費</td>
+				<td th:if="${udaPayment.type == 2}">趣味</td>
+				<td th:if="${udaPayment.type == 3}">教養</td>
+				<td th:text="${udaPayment.name}"></td>
+				<td th:text="${udaPayment.price} + '円'"></td>
+				<td>
+					<form method="post" th:action="@{/uda-payments/find-by-id}">
+						<input type="hidden" name="id" th:value="${udaPayment.id}"/>
+						<input type="submit" value="削除"/>
+					</form>
+				</td>
+		</tr>
+	</table>
+	
+	<table class="table table-striped">
+		<tr>
+			<th>合計金額</th>
+			<td th:text="${totalPrice} + '円'"></td>
+		<tr>
+	</table>
+	
+</body>
+</html>

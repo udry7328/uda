@@ -25,15 +25,22 @@ public class UdaPayment {
 		this.budgetType = budgetType;
 	}
 
-	// TODO 種別はENUMにしたい。
 	/**
-	 * 種別
+	 * 収支明細種別
 	 */
-	private int type;
+	private String budgetDetailType;
 
-	// TODO これ不要かも。種別さえあれば。⇒代わりに、この項目を備考的なものにするか。
+	public String getBudgetDetailType() {
+		return budgetDetailType;
+	}
+
+	public void setBudgetDetailType(String budgetDetailType) {
+		this.budgetDetailType = budgetDetailType;
+	}
+
+	// TODO 変数名変えたいな。DBも。
 	/**
-	 * 品名
+	 * 補足
 	 */
 	private String name;
 
@@ -44,15 +51,14 @@ public class UdaPayment {
 
 	/**
 	 * コンストラクタ
-	 * 
 	 * @param date
-	 * @param type
+	 * @param budgetDetailType
 	 * @param name
 	 * @param price
 	 */
-	public UdaPayment(String date, int type, String name, int price) {
+	public UdaPayment(String date, String budgetDetailType, String name, int price) {
 		this.date = date;
-		this.type = type;
+		this.budgetDetailType = budgetDetailType;
 		this.name = name;
 		this.price = price;
 	}
@@ -78,14 +84,6 @@ public class UdaPayment {
 		this.date = date;
 	}
 
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -95,13 +93,20 @@ public class UdaPayment {
 	}
 
 	public int getPrice() {
-		// TODO budgetTypeをEnumにして、もうちょっとうまく実装したいような....。
-		// 支出ならマイナス値にする
-		return budgetType.equals("支出") ? price - price * 2 : price;
+		// TODO 支出の場合、DB値は正の値、画面表示値は負の値 という実装にしたい。
+		return price;
 	}
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	
+	/**
+	 * 支出ならマイナス
+	 */
+	public int getPriceForDisplay() {
+		// TODO service.findAll 向けにとりあえず作ったメソッドだが、もうちょっとうまく実装したい
+		return budgetType.equals("支出") ? price - price * 2 : price;
 	}
 
 }

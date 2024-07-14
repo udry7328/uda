@@ -1,4 +1,4 @@
-package com.example.demo.dao.impl;
+package com.example.demo.dao;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,13 +10,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.UdaPayment;
+import com.example.demo.enumeration.EBudgetDetailType;
 
 @Repository
 public class UdaPaymentsDao {
-
 	private final JdbcTemplate jdbcTemplate;
-	private final String SELECT = "SELECT id, date, budget_type, type, name, price FROM uda_payment ";
-	private final String INSERT = "insert into uda_payment (date, budget_type, type, name, price) values (?,?,?,?,?)";
+	// TODO この辺のSQLの管理は、別途プロパティファイルとかに切り出したい。
+	// TODO カラムの増減があったとき、修正が大変。何とかしたい。
+	private final String SELECT = "SELECT id, date, budget_type, budget_detail_type, name, price FROM uda_payment ";
+	private final String INSERT = "insert into uda_payment (date, budget_type, budget_detail_type, name, price) values (?,?,?,?,?)";
 	private final String DELETE = "delete from uda_payment ";
 
 	public UdaPaymentsDao(JdbcTemplate jdbcTemplate) {
@@ -39,7 +41,9 @@ public class UdaPaymentsDao {
 	 * @return
 	 */
 	public void insertUdaPayment(UdaPayment payment) {
-		jdbcTemplate.update(INSERT, payment.getDate(), payment.getBudgetType(), payment.getType(), payment.getName(),
+		// TODO カラムの増減があったとき、修正が大変。何とかしたい。
+		jdbcTemplate.update(INSERT, payment.getDate(), payment.getBudgetType(),
+				EBudgetDetailType.toType(payment.getBudgetDetailType()).toString(), payment.getName(),
 				payment.getPrice());
 
 	}
@@ -91,6 +95,7 @@ public class UdaPaymentsDao {
 	 * @return
 	 */
 	private UdaPayment createUdaPayment(Map<String, Object> result) {
+		// TODO カラムの増減があったとき、修正が大変。何とかしたい。
 		UdaPayment payment = new UdaPayment();
 		payment.setId((int) result.get("id"));
 		Date date = (Date) result.get("date");
@@ -98,7 +103,8 @@ public class UdaPaymentsDao {
 		String strDate = dateFormat.format(date);
 		payment.setDate(strDate);
 		payment.setBudgetType((String) result.get("budget_type"));
-		payment.setType((int) result.get("type"));
+		String budgetDetailType = (String) result.get("budget_detail_type");
+		payment.setBudgetDetailType(EBudgetDetailType.ToDisplay(budgetDetailType));
 		payment.setName((String) result.get("name"));
 		payment.setPrice((int) result.get("price"));
 		return payment;

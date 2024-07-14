@@ -38,13 +38,12 @@ public class UdaPaymentsController {
 	}
 
 	/**
-	 * 
+	 * 明細追加画面へ遷移
 	 * @param model
 	 * @return
 	 */
 	@GetMapping("/add")
 	public String add(Model model) {
-		// TODO 明細追加画面で、初期値に支出の種別が表示されてしまう件
 		return "payments/add";
 	}
 

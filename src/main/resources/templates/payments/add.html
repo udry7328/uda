@@ -12,10 +12,30 @@
 	<p><form class="left-form"><input type="submit" value="一覧へ戻る" formaction="/uda-payments" formmethod="GET"/></form></p>
 	<form method="post" th:action="@{/uda-payments/add}">
 		日時：<input type="date" name="date" required><br>
-		収入/支出：<input type="radio" name="budgetType" value="収入" checked onclick="checkradio('none')">収入 <input type="radio" name="budgetType" value="種別" onclick="checkradio('inline')">支出<br>
-		種別： <span id="1"><input type="radio" name="type" value="1" checked>食費 </span><span id="2"><input type="radio" name="type" value="2">趣味 </span><span id="3"><input type="radio" name="type" value="3">教養</span><br>
-		品名：<input type="text" name="name"	maxlength="15" size="30" required><br>
+		収入/支出：<input type="radio" name="budgetType" value="収入" onclick="hideExpenditure()">収入 <input type="radio" name="budgetType" value="支出" onclick="hideIncome()">支出<br>
+		収支明細種別：<select id="select", name="budgetDetailType" required disabled>
+			  <option value="" selected>選択してください</option>
+			  <option id="1", value="給与">給与</option>
+			  <option id="2", value="賞与">賞与</option>
+			  <option id="3" value="食費">食費</option>
+			  <option id="4" value="日用品">日用品</option>
+			  <option id="5" value="交通費">交通費</option>
+			  <option id="6" value="趣味">趣味</option>
+			  <option id="7" value="衣服/美容">衣服/美容</option>
+			  <option id="8" value="交際費">交際費</option>
+			  <option id="9" value="健康/医療">健康/医療</option>
+			  <option id="10" value="教育/教養">教育/教養</option>
+			  <option id="11" value="水道/光熱費">水道/光熱費</option>
+			  <option id="12" value="通信費">通信費</option>
+			  <option id="13" value="住宅ローン">住宅ローン</option>
+			  <option id="14" value="車">車</option>
+			  <option id="15" value="税/社会保障">税/社会保障</option>
+			  <option id="16" value="保険">保険</option>
+			  <option id="17" value="資産形成">資産形成</option>
+			  <option value="その他">その他</option>
+		</select><br>		
 		金額：<input type="number" name="price" oninput="sliceMaxLength(this, 8)" required>円<br>
+		備考：<input type="text" name="name"	maxlength="15" size="30"><br>
 		<br>
 		<input type="submit" value="登録">
 	</form>

@@ -1,12 +1,11 @@
 package com.example.demo.service;
 
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dao.impl.UdaPaymentsDao;
+import com.example.demo.dao.UdaPaymentsDao;
 import com.example.demo.entity.UdaPayment;
 import com.example.demo.util.CalendarUtil;
 
@@ -28,7 +27,8 @@ public class UdaPaymentsService {
 		List<UdaPayment> list = dao.findAll();
 		totalPrice = 0;
 		for (UdaPayment payment : list) {
-			totalPrice += payment.getPrice();
+			// TODO 検討の余地あり
+			totalPrice += payment.getPriceForDisplay();
 		}
 		return list;
 	}

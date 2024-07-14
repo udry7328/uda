@@ -14,19 +14,17 @@
 		<tr>
 			<th>収支年月日</th>
 			<th>収入/支出</th>
-			<th>種別</th>
-			<th>品名</th>
+			<th>収支明細種別</th>
 			<th>金額</th>
+			<th>備考</th>
 		</tr>
 
 		<tr th:Object="${udaPayment}">
 				<td th:text="${udaPayment.date}"></td>
 				<td th:text="${udaPayment.budgetType}"></td>
-				<td th:if="${udaPayment.type == 1}">食費</td>
-				<td th:if="${udaPayment.type == 2}">趣味</td>
-				<td th:if="${udaPayment.type == 3}">教養</td>
+				<td th:text="${udaPayment.budgetDetailType}"></td>
+				<td th:text="${udaPayment.getPriceForDisplay} + '円'"></td>
 				<td th:text="${udaPayment.name}"></td>
-				<td th:text="${udaPayment.price} + '円'"></td>
 		</tr>
 	</table>
 

@@ -63,7 +63,7 @@ public class UdaPaymentsService {
 		List<UdaPayment> list = dao.findUdaPaymentsByYearAndMonth(startDate, endDate);
 		totalPrice = 0;
 		for (UdaPayment payment : list) {
-			totalPrice += payment.getPrice();
+			totalPrice += payment.getPriceForDisplay();
 		}
 
 		return list;

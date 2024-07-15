@@ -45,11 +45,11 @@
 	</table>
 	
 	<table class="table right-form">
-		<tr>
+		<tr class="bold">
 			<th></th>
 			<td th:if="${totalPrice > 0}" th:style="'color:blue;'" th:text="'収支総計：' + ${totalPrice} + '円'"></td>
 			<td th:if="${totalPrice == 0}" th:text="'収支総計：' + ${totalPrice} + '円'"></td>
-			<td th:if="${totalPrice < 0}" th:style="'color:red;'" th:text="'収支総計：' + ${totalPrice} + '円'"></td>
+			<td th:if="${totalPrice < 0}" th:style="'color:crimson;'" th:text="'収支総計：' + ${totalPrice} + '円'"></td>
 		<tr>
 	</table>
 	

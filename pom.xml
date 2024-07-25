@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>uda-kakeibo</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>uda-kakeibo</name>
 	<description>Demo project for Spring Boot</description>
 	<url />

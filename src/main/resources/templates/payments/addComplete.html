@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 <meta charset="UTF-8">
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/css/styles.css}" rel="stylesheet">
-<title>明細削除画面</title>
+<title>明細追加完了画面</title>
 </head>
 <body>
-<h1>明細削除画面</h1>
-<p style="text-align:center">下記データを削除してよろしいですか？</p>
-
+	<h1>明細追加完了画面</h1>
+	明細追加完了しました。
 	<table class="table table-striped">
 		<tr>
 			<th>収支年月日</th>
@@ -27,12 +26,6 @@
 				<td th:text="${udaPayment.name}"></td>
 		</tr>
 	</table>
-
-	<form method="post" th:action="@{/uda-payments/delete}">
-		<input type="hidden" name="id" th:value="${udaPayment.id}"/>
-		<input type="submit" value="はい"/>
-		<input type="submit" value="いいえ" formaction="/uda-payments" formmethod="GET"/>
-	</form>
-
+	<form><input type="submit" value="一覧へ戻る" formaction="/uda-payments" formmethod="GET"/> <input type="submit" value="続けて明細追加する" formaction="/uda-payments/add" formmethod="GET"/></form>
 </body>
 </html>

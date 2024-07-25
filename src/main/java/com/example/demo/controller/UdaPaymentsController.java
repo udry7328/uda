@@ -51,11 +51,12 @@ public class UdaPaymentsController {
 	public String complete(Model model) {
 		return "payments/complete";
 	}
-
+;
 	@PostMapping("/add")
 	public String complete(Model model, UdaPayment payment) {
 		service.insertUdaPayment(payment);
-		return "payments/complete";
+		model.addAttribute("udaPayment", payment);
+		return "payments/addComplete";
 	}
 
 	@PostMapping("/findByYearAndMonth")
@@ -66,7 +67,7 @@ public class UdaPaymentsController {
 		model.addAttribute("year", year);
 		model.addAttribute("month", month);
 		model.addAttribute("list", list2);
-		return "payments/index";
+		return "payments/findByYearAndMonth";
 	}
 
 	/**

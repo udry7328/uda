@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>家計簿一覧</h1>
-	<p><form class="right-form"><input type="submit" value="明細追加" formaction="/uda-payments/add" formmethod="GET"/></form></p>
+	<p><form class="right-form"><input type="submit" value="一覧へ戻る" formaction="/uda-payments" formmethod="GET"/> <input type="submit" value="明細追加" formaction="/uda-payments/add" formmethod="GET"/></form></p>
 	
 	<form method="post" th:action="@{/uda-payments/findByYearAndMonth}">
 		集計したい年月：
@@ -16,6 +16,8 @@
 		<input type="text" name="month" oninput="sliceMaxLength(this, 4)" size="4" required>月
 		<input type="submit" value="集計">
 	</form>
+
+	<h3 th:if="${year != null}" th:text="${year} + '年' + ${month} + '月の集計'"></h3>
 	
 	<table class="table table-striped">
 		<tr>

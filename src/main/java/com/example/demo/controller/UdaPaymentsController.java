@@ -22,7 +22,8 @@ public class UdaPaymentsController {
 	}
 
 	/**
-	 * 
+	 * 一覧画面
+	 * @param model
 	 * @return
 	 */
 	// URL：http://localhost:8080/uda-payments
@@ -45,18 +46,34 @@ public class UdaPaymentsController {
 		return "payments/add";
 	}
 
+	/**
+	 * 完了画面
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/complete")
 	public String complete(Model model) {
 		return "payments/complete";
 	}
-;
+
+	/**
+	 * 追加画面
+	 * @param model
+	 * @param payment
+	 * @return
+	 */
 	@PostMapping("/add")
 	public String complete(Model model, UdaPayment payment) {
 		service.insertUdaPayment(payment);
 		model.addAttribute("udaPayment", payment);
 		return "payments/addComplete";
 	}
-
+	
+	/**
+	 * 一覧画面（年月指定）
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/findByYearAndMonth")
 	public String findByYearAndMonth(Model model, @RequestParam String year, @RequestParam String month) {
 		List<UdaPayment> list2 = service.findUdaPayementsByYearAndMonth(year, month);

@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.UdaPaymentsDao;
@@ -16,7 +15,6 @@ public class UdaPaymentsService {
 	// 合計金額格納用
 	private int totalPrice;
 
-	@Autowired
 	public UdaPaymentsService(UdaPaymentsDao dao) {
 		this.dao = dao;
 	}
